@@ -28,8 +28,8 @@ public class MainPageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.add_post){
-            Intent intentToFeed = new Intent(this, FeedActivity.class);
-            startActivity(intentToFeed);
+            Intent intentToUpload = new Intent(this, UploadActivity.class);
+            startActivity(intentToUpload);
         }else if(item.getItemId() == R.id.signOut){
             mAuth.signOut();
             Intent intentToSignIn = new Intent(this, SignInActivity.class);
