@@ -34,6 +34,7 @@ public class SignInActivity extends AppCompatActivity {
         if (currentUser != null){
             Intent intentToMainPage = new Intent(this, MainPageActivity.class);
             startActivity(intentToMainPage);
+            finish();
         }
 
     }
