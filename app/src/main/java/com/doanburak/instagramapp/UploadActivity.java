@@ -98,9 +98,9 @@ public class UploadActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Toast.makeText(UploadActivity.this, "Post uploading process completed.", Toast.LENGTH_LONG).show();
-                                        Intent intentToFeed = new Intent(UploadActivity.this, FeedActivity.class);
-                                        intentToFeed.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intentToFeed);
+                                        Intent intentToMain = new Intent(UploadActivity.this, MainPageActivity.class);
+                                        intentToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intentToMain);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

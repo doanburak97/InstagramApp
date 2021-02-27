@@ -3,6 +3,8 @@ package com.doanburak.instagramapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,15 +23,22 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class MainPageActivity extends AppCompatActivity {
 
+    RecyclerView rv_posts;
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
+
     ArrayList<String> emailFromFB;
     ArrayList<String> commentFromFB;
     ArrayList<String> urlFromFB;
+    ArrayList<Date> dateFromFB;
+
+    MainRecyclerViewAdapter mainRecyclerViewAdapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,11 +73,20 @@ public class MainPageActivity extends AppCompatActivity {
         emailFromFB = new ArrayList<>();
         commentFromFB = new ArrayList<>();
         urlFromFB = new ArrayList<>();
+        dateFromFB = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         getDataFromFirestore();
+
+        //RecyclerView
+        rv_posts = findViewById(R.id.rv_posts);
+        rv_posts.setLayoutManager(new LinearLayoutManager(this));
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(emailFromFB, commentFromFB, urlFromFB);
+        rv_posts.setAdapter(mainRecyclerViewAdapter);
+
+        mainRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     public void getDataFromFirestore(){
@@ -91,10 +109,12 @@ public class MainPageActivity extends AppCompatActivity {
                         String comment = (String) data.get("comment");
                         String email = (String) data.get("email");
                         String downloadUrl = (String) data.get("downloadUrl");
+//                        Date date = (Date) data.get("date");
 
                         emailFromFB.add(email);
                         commentFromFB.add(comment);
                         urlFromFB.add(downloadUrl);
+//                      dateFromFB.add(date);
 
                     }
 
