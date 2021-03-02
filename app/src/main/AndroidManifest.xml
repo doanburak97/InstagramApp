@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramApp">
         <activity android:name=".UploadActivity"></activity>
-        <activity android:name=".FeedActivity" />
         <activity android:name=".MainPageActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity">

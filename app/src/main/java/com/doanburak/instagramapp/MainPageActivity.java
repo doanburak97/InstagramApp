@@ -60,6 +60,10 @@ public class MainPageActivity extends AppCompatActivity {
             Intent intentToSignIn = new Intent(this, SignInActivity.class);
             startActivity(intentToSignIn);
             finish();
+        }else if(item.getItemId() == R.id.main_page){
+            Intent intentToMainPage = new Intent(this, MainPageActivity.class);
+            startActivity(intentToMainPage);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -78,7 +82,6 @@ public class MainPageActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        getDataFromFirestore();
 
         //RecyclerView
         rv_posts = findViewById(R.id.rv_posts);
@@ -86,7 +89,11 @@ public class MainPageActivity extends AppCompatActivity {
         mainRecyclerViewAdapter = new MainRecyclerViewAdapter(emailFromFB, commentFromFB, urlFromFB);
         rv_posts.setAdapter(mainRecyclerViewAdapter);
 
+
         mainRecyclerViewAdapter.notifyDataSetChanged();
+
+        getDataFromFirestore();
+
     }
 
     public void getDataFromFirestore(){
@@ -109,12 +116,12 @@ public class MainPageActivity extends AppCompatActivity {
                         String comment = (String) data.get("comment");
                         String email = (String) data.get("email");
                         String downloadUrl = (String) data.get("downloadUrl");
-//                        Date date = (Date) data.get("date");
+                        //Date date = (Date) data.get("date");
 
                         emailFromFB.add(email);
                         commentFromFB.add(comment);
                         urlFromFB.add(downloadUrl);
-//                      dateFromFB.add(date);
+                        //dateFromFB.add(date);
 
                     }
 
